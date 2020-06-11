@@ -40,6 +40,7 @@ partnerRouter.route('/')
     .catch(err => next(err));
 });
 
+//getting parters by ID
 partnerRouter.route('/:partnerId')
 .get((req, res, next) => {
     Partner.findById(req.params.partnerId)
@@ -54,6 +55,7 @@ partnerRouter.route('/:partnerId')
     res.statusCode = 403;
     res.end(`POST operation not supported on /partners/${req.params.partnerId}`);
 })
+//Changing the document
 .put((req, res, next) => {
     Partner.findByIdAndUpdate(req.params.partnerId, {
         $set: req.body
@@ -65,6 +67,8 @@ partnerRouter.route('/:partnerId')
     })
     .catch(err => next(err));
 })
+
+//deleting the document
 .delete((req, res, next) => {
     Partner.findByIdAndDelete(req.params.partnerId)
     .then(response => {
